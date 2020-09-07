@@ -9,7 +9,7 @@ router.post("/register", async (req, res) => {
     // 1. destructure the req.body (name, email, password)
     const { name, email, password } = req.body;
 
-    // 2. check if user exist (if iser exist then throw error)
+    // 2. check if user exist (if user exist then throw error)
     const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
       email,
     ]);
@@ -30,11 +30,43 @@ router.post("/register", async (req, res) => {
 
     // 5. generating our jwt token
     const token = jwtGenerator(newUser.rows[0].user_id);
-    res.json({token});
+    res.json({ token });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// LOGIN ROUTE
+router.post("/login", async (req, res) => {
+  try {
+    // 1. destructure the req.body
+    const { email, password } = req.body;
+
+    // 2. check if user exist (if not exist then we throw error)
+    const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
+      email,
+    ]);
+    if (user.rows.length === 0) { // if not exist then we throw error
+      return res.status(401).json("Password or Email is incorrect");
+    }
+
+    // 3. checl if incoming password is the same as the database password
+    const validPassword = await bcrypt.compare(
+      password,
+      user.rows[0].user_password
+    ); // true/false
+    if (!validPassword) {
+      return res.status(401).json("Password or Email is incorrect");
+    }
+
+    // 4. give them the jwt token
+    const token = jwtGenerator(user.rows[0].user_id);
+    res.json({ token });
 
   } catch (err) {
     console.error(err.message);
-    res.status(5000).send("Server Error");
+    res.status(500).send("Server Error")
   }
 });
 
