@@ -4,6 +4,7 @@ const pool = require("../db");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utils/jwtGenerator");
 const validInfo = require("../middleware/validInfo");
+const authorization = require("../middleware/authorization");
 
 // REGISTER ROUTE
 router.post("/register", validInfo, async (req, res) => {
@@ -30,9 +31,9 @@ router.post("/register", validInfo, async (req, res) => {
       [name, email, bcryptPassword]
     );
 
-    // 5. generating our jwt token
-    const jwtToken = jwtGenerator(newUser.rows[0].user_id);
-    res.json({ jwtToken });
+    // 5. generating our token
+    const token = jwtGenerator(newUser.rows[0].user_id);
+    res.json({ token });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -59,17 +60,28 @@ router.post("/login", validInfo, async (req, res) => {
       password,
       user.rows[0].user_password
     ); // true/false
+
     if (!validPassword) {
       return res.status(401).json("Invalid Credential");
     }
 
     // 4. give them the jwt token
-    const jwtToken = jwtGenerator(user.rows[0].user_id);
-    res.json({ jwtToken });
+    const token = jwtGenerator(user.rows[0].user_id);
+    res.json({ token });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
+
+// if token valid from authorization, then return true 
+router.get("/verify", authorization, async (req, res) => {
+  try {
+    res.json(true);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+})
 
 module.exports = router;
