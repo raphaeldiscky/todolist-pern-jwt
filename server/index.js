@@ -6,7 +6,6 @@ const cors = require("cors");
 app.use(express.json());
 app.use(cors());
 
-
 // ROUTES
 // register and login routes
 app.use("/auth", require("./routes/jwtAuth"))
