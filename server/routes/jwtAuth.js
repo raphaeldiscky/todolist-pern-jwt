@@ -1,4 +1,5 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 const pool = require("../db");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utils/jwtGenerator");
@@ -25,7 +26,7 @@ router.post("/register", async (req, res) => {
     // 4. enter the new user inside our database
     const newUser = await pool.query(
       "INSERT INTO users (user_name, user_email, user_password) VALUES ($1, $2, $3) RETURNING *",
-      [name, password, bcryptPassword]
+      [name, email, bcryptPassword]
     );
 
     // 5. generating our jwt token
@@ -47,26 +48,26 @@ router.post("/login", async (req, res) => {
     const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
       email,
     ]);
-    if (user.rows.length === 0) { // if not exist then we throw error
-      return res.status(401).json("Password or Email is incorrect");
+    if (user.rows.length === 0) {
+      // if not exist then we throw error
+      return res.status(401).json("Invalid Credential");
     }
 
-    // 3. checl if incoming password is the same as the database password
+    // 3. check if incoming password is the same as the database password
     const validPassword = await bcrypt.compare(
       password,
       user.rows[0].user_password
     ); // true/false
     if (!validPassword) {
-      return res.status(401).json("Password or Email is incorrect");
+      return res.status(401).json("Invalid Credential");
     }
 
     // 4. give them the jwt token
     const token = jwtGenerator(user.rows[0].user_id);
     res.json({ token });
-
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server Error")
+    res.status(500).send("Server Error");
   }
 });
 
