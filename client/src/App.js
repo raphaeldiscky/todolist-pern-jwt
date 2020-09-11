@@ -1,11 +1,13 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import "./App.css";
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from "react-router-dom";
+
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -15,6 +17,25 @@ function App() {
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   };
+
+  async function isAuth() {
+    try {
+      const response = await fetch("http://localhost:5000/auth/verify", {
+        method: "GET",
+        headers: { token: localStorage.token },
+      });
+      const parseRes = await response.json();
+      // console.log(parseRes); //if jwt token is valid then true
+      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false)
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
+  // useEffect => run function that going to check if token is valid and continue to show dashboard if authenticated even after refresh
+  useEffect(() => {
+    isAuth();
+  });
 
   return (
     <Fragment>
@@ -26,7 +47,7 @@ function App() {
               path="/login"
               render={(props) =>
                 !isAuthenticated ? (
-                  <Login {...props} setAuth={setAuth}/>
+                  <Login {...props} setAuth={setAuth} />
                 ) : (
                   <Redirect to="/dashboard" />
                 )
@@ -37,7 +58,7 @@ function App() {
               path="/register"
               render={(props) =>
                 !isAuthenticated ? (
-                  <Register {...props} setAuth={setAuth}/>
+                  <Register {...props} setAuth={setAuth} />
                 ) : (
                   <Redirect to="/login" />
                 )
@@ -48,7 +69,7 @@ function App() {
               path="/dashboard"
               render={(props) =>
                 isAuthenticated ? (
-                  <Dashboard {...props} setAuth={setAuth}/>
+                  <Dashboard {...props} setAuth={setAuth} />
                 ) : (
                   <Redirect to="/login" />
                 )

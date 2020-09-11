@@ -18,8 +18,8 @@ const Dashboard = ({ setAuth }) => {
   }
 
   useEffect(() => {
-    getName();
-  });
+    getName(); // useEffect makes a lot of request, so adding a bracket useEffect only makes one request
+  }, []);
 
   const logout = (e) => {
     e.preventDefault();
