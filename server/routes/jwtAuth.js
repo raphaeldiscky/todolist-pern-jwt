@@ -17,7 +17,7 @@ router.post("/register", validInfo, async (req, res) => {
       email,
     ]);
     if (user.rows.length !== 0) {
-      return res.status(401).send("User already exist");
+      return res.status(401).json("User already exist");
     }
 
     // 3. Bcrypt the user password
@@ -52,7 +52,7 @@ router.post("/login", validInfo, async (req, res) => {
     ]);
     if (user.rows.length === 0) {
       // if not exist then we throw error
-      return res.status(401).json("Invalid Credential");
+      return res.status(401).json("Email or password is incorrect");
     }
 
     // 3. check if incoming password is the same as the database password
@@ -62,7 +62,7 @@ router.post("/login", validInfo, async (req, res) => {
     ); // true/false
 
     if (!validPassword) {
-      return res.status(401).json("Invalid Credential");
+      return res.status(401).json("Email or password is incorrect");
     }
 
     // 4. give them the jwt token

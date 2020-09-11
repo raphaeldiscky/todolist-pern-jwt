@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
-import {Link} from "react-router-dom"; // Link => guide us back to register route
- 
+import { Link } from "react-router-dom"; // Link => guide us back to register route
+import { toast } from "react-toastify";
+
 const Login = ({ setAuth }) => {
   const [inputs, setInputs] = useState({
     email: "",
@@ -16,17 +17,24 @@ const Login = ({ setAuth }) => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = {email, password}
+      const body = { email, password };
       const response = await fetch("http://localhost:5000/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
       });
       const parseRes = await response.json();
       // console.log(parseRes);
-      // parseRes is object 
-      localStorage.setItem("token", parseRes.token);
-      setAuth(true);
+      // parseRes is object
+
+      if (parseRes.token) {
+        localStorage.setItem("token", parseRes.token);
+        setAuth(true);
+        toast.success("Login Successfully");
+      } else {
+        setAuth(false);
+        toast.error(parseRes); // show password and email incorrect from jwtAuth.js
+      }
     } catch (err) {
       console.error(err.message);
     }

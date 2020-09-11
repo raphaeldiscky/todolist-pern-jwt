@@ -1,5 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import "./App.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   BrowserRouter as Router,
@@ -11,6 +13,8 @@ import {
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
+
+toast.configure();
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -26,7 +30,7 @@ function App() {
       });
       const parseRes = await response.json();
       // console.log(parseRes); //if jwt token is valid then true
-      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false)
+      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
     } catch (err) {
       console.error(err.message);
     }
