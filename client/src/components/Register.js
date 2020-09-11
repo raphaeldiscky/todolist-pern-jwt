@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import {Link} from "react-router-dom";
 
 const Register = ({setAuth}) => {
   const [inputs, setInputs] = useState({
@@ -23,7 +24,7 @@ const Register = ({setAuth}) => {
           const parseRes = await response.json();
           //console.log(parseRes); //we will get jwt Token
 
-          localStorage.setItem("token", parseRes.token);
+          localStorage.setItem("token", parseRes.token); // store token in local storage
           setAuth(true);
       } catch (err) {
           console.error(err.message);
@@ -59,6 +60,7 @@ const Register = ({setAuth}) => {
         />
         <button className="btn btn-success btn-block">Submit</button>
       </form>
+      <Link to="/login">Login</Link>
     </Fragment>
   );
 };
