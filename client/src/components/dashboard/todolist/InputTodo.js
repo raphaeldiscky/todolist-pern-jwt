@@ -1,23 +1,25 @@
 import React, { Fragment, useState } from "react";
 
-const InputTodo = () => {
+const InputTodo = ({ setTodosChange }) => {
   const [description, setDescription] = useState("");
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
       const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json")
+      myHeaders.append("Content-Type", "application/json");
       myHeaders.append("token", localStorage.token);
 
       const body = { description };
-      const response = await fetch("http://localhost:5000/dashboard/todos", { 
+      const response = await fetch("http://localhost:5000/dashboard/todos", {
         method: "POST",
         headers: myHeaders,
         body: JSON.stringify(body),
       });
       const parseRes = await response.json();
       console.log(parseRes);
+      setTodosChange(true);
+      setDescription("");
       // window.location = "/";
     } catch (err) {
       console.error(err.message);

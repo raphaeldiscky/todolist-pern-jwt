@@ -8,8 +8,9 @@ import ListTodo from "./todolist/ListTodo";
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
   const [allTodos, setAllTodos] = useState([]);
+  const [todosChange, setTodosChange] = useState(false);
 
-  async function getName() {
+  const getProfile = async () => {
     try {
       const response = await fetch("http://localhost:5000/dashboard/", {
         method: "GET",
@@ -22,18 +23,23 @@ const Dashboard = ({ setAuth }) => {
     } catch (err) {
       console.error(err.message);
     }
-  }
+  };
+
+  const logout = async (e) => {
+    e.preventDefault();
+    try {
+      localStorage.removeItem("token");
+      setAuth(false);
+      toast.success("Logged Out Successfully");
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
   useEffect(() => {
-    getName(); // useEffect makes a lot of request, so adding a bracket useEffect only makes one request
-  }, []);
-
-  const logout = (e) => {
-    e.preventDefault();
-    localStorage.removeItem("token");
-    setAuth(false);
-    toast.success("Logged Out Successfully");
-  };
+    getProfile(); // useEffect makes a lot of request, so adding a bracket useEffect only makes one request
+    setTodosChange(false);
+  }, [todosChange]); // watch all todosChange
 
   return (
     <div>
@@ -43,8 +49,8 @@ const Dashboard = ({ setAuth }) => {
           Logout
         </button>
       </div>
-      <InputTodo />
-      <ListTodo allTodos={allTodos}/>
+      <InputTodo setTodosChange={setTodosChange} />
+      <ListTodo allTodos={allTodos} />
     </div>
   );
 };
