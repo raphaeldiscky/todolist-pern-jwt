@@ -10,7 +10,7 @@ router.get("/", authorization, async (req, res) => {
     // ]);
 
     const user = await pool.query(
-      "SELECT u.user_name, t.todo_id, t.description FROM users AS u LEFT JOIN todos AS t ON u.user_id = t.user_id WHERE u.user_id = $1",
+      "SELECT u.user_name, t.todo_id, t.description FROM users AS u LEFT JOIN todos AS t ON u.user_id = t.user_id WHERE u.user_id = $1 ORDER BY todo_id",
       [req.user.id] // from jwtGenerator payload
     );
 
