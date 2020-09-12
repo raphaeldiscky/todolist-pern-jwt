@@ -8,7 +8,7 @@ const ListTodos = ({ allTodos, setTodosChange}) => {
   // delete todo function
   const deleteTodo = async (id) => {
     try {
-      const deleteTodo = await fetch(`http://localhost:5000/dashboard/todos/${id}`, {
+      await fetch(`http://localhost:5000/dashboard/todos/${id}`, {
         method: "DELETE",
         headers: {token: localStorage.token}
       });
