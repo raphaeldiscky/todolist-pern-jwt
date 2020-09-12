@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import EditTodo from "./EditTodo";
 
-const ListTodos = ({ allTodos }) => {
+const ListTodos = ({ allTodos, setTodosChange}) => {
   console.log(allTodos); //get all data back
   const [todos, setTodos] = useState([]); // show empty array
 
@@ -48,7 +48,7 @@ const ListTodos = ({ allTodos }) => {
             <tr key={todo.todo_id}>
               <td>{todo.description}</td>
               <td>
-                <EditTodo todo={todo} />
+                <EditTodo todo={todo} setTodosChange={setTodosChange}/>
               </td>
               <td>
                 <button

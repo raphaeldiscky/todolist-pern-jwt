@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 
-const EditTodo = ({ todo }) => {
+const EditTodo = ({ todo, setTodosChange }) => {
   // console.log(todo);
   const [description, setDescription] = useState(todo.description);
 
@@ -9,16 +9,22 @@ const EditTodo = ({ todo }) => {
     e.preventDefault(); // stopping the refresh page
     try {
       const body = { description };
+
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("token", localStorage.token);
+
       // use proxy => shorten our url and help us in production using heroku domain
       const response = await fetch(
-        `/todos/${todo.todo_id}`,
+        `http://localhost:5000/dashboard/todos/${todo.todo_id}`,
         {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: myHeaders,
           body: JSON.stringify(body),
         }
       );
-      window.location = "/"; // refresh page
+      setTodosChange(true);
+      // window.location = "/"; // refresh page
     } catch (err) {
       console.error(err.message);
     }

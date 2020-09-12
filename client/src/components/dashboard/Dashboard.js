@@ -50,7 +50,7 @@ const Dashboard = ({ setAuth }) => {
         </button>
       </div>
       <InputTodo setTodosChange={setTodosChange} />
-      <ListTodo allTodos={allTodos} />
+      <ListTodo allTodos={allTodos} setTodosChange={setTodosChange}/>
     </div>
   );
 };
