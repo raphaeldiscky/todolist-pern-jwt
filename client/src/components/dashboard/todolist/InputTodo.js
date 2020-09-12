@@ -6,16 +6,19 @@ const InputTodo = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json")
+      myHeaders.append("token", localStorage.token);
+
       const body = { description };
-      // proxy is only use in development so it will be ignored in production
-      // so if there is no http://localhost:5000 then by default it is going to use heroku domain
-      // remember this heroku app is just our server serving the build static content and  also holding the resful api
-      const response = await fetch("/todos", { // fetch request
+      const response = await fetch("http://localhost:5000/dashboard/todos", { 
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: myHeaders,
         body: JSON.stringify(body),
       });
-      window.location = "/";
+      const parseRes = await response.json();
+      console.log(parseRes);
+      // window.location = "/";
     } catch (err) {
       console.error(err.message);
     }

@@ -1,5 +1,8 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+
+// components
+import InputTodo from "./todolist/InputTodo";
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
@@ -26,16 +29,19 @@ const Dashboard = ({ setAuth }) => {
     e.preventDefault();
     localStorage.removeItem("token");
     setAuth(false);
-    toast.success("Logged Out Successfully")
+    toast.success("Logged Out Successfully");
   };
 
   return (
-    <Fragment>
-      <h1>{name}'s Dashboard </h1>
-      <button className="btn btn-primary" onClick={(e) => logout(e)}>
-        Logout
-      </button>
-    </Fragment>
+    <div>
+      <div className="d-flex mt-5 justify-content-around">
+        <h1>{name}'s Todo List</h1>
+        <button className="btn btn-primary" onClick={(e) => logout(e)}>
+          Logout
+        </button>
+      </div>
+      <InputTodo />
+    </div>
   );
 };
 
