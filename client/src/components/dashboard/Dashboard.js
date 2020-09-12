@@ -3,9 +3,11 @@ import { toast } from "react-toastify";
 
 // components
 import InputTodo from "./todolist/InputTodo";
+import ListTodo from "./todolist/ListTodo";
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
+  const [allTodos, setAllTodos] = useState([]);
 
   async function getName() {
     try {
@@ -14,8 +16,9 @@ const Dashboard = ({ setAuth }) => {
         headers: { token: localStorage.token }, // check if token is valid
       });
       const parseRes = await response.json();
-      // console.log(parseRes); // show name in console
-      setName(parseRes.user_name);
+      //console.log(parseRes); // show desc, todo_id, user_id  in console
+      setAllTodos(parseRes);
+      setName(parseRes[0].user_name); // get the first item => name
     } catch (err) {
       console.error(err.message);
     }
@@ -41,6 +44,7 @@ const Dashboard = ({ setAuth }) => {
         </button>
       </div>
       <InputTodo />
+      <ListTodo allTodos={allTodos}/>
     </div>
   );
 };
