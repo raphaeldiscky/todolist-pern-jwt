@@ -50,7 +50,7 @@ const Login = ({ setAuth }) => {
               <div class="container">
                 <div class="row">
                   <div class="col-md-9 col-lg-8 mx-auto">
-                    <h3 class="login-heading mb-4">Welcome back!</h3>
+                    <h3 class="login-heading mb-4 text-center">Welcome back!</h3>
                     <form onSubmit={onSubmitForm}>
                       <div class="form-label-group">
                         <input
