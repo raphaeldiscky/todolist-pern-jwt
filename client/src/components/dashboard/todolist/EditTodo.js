@@ -15,7 +15,7 @@ const EditTodo = ({ todo, setTodosChange }) => {
       myHeaders.append('token', localStorage.token);
 
       // use proxy => shorten our url and help us in production using heroku domain
-      await fetch(`http://localhost:5000/dashboard/todos/${todo.todo_id}`, {
+      await fetch(`/dashboard/todos/${todo.todo_id}`, {
         method: 'PUT',
         headers: myHeaders,
         body: JSON.stringify(body)

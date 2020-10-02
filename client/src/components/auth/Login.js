@@ -18,7 +18,7 @@ const Login = ({ setAuth }) => {
     e.preventDefault();
     try {
       const body = { email, password };
-      const response = await fetch('http://localhost:5000/auth/login', {
+      const response = await fetch('/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
@@ -42,7 +42,7 @@ const Login = ({ setAuth }) => {
 
   return (
     <Fragment>
-      <div class='container-fluid'>
+      <div className='container-fluid'>
         <div className='row no-gutter'>
           <div className='d-none d-md-flex col-md-4 col-lg-6 bg-image'></div>
           <div className='col-md-8 col-lg-6'>
