@@ -11,7 +11,7 @@ const Landing = () => {
           <div className='embed-responsive embed-responsive-4by3'>
             <iframe
               title='spongebob todolist'
-              src='http://www.youtube.com/embed/HwwGPOhF4CI?autoplay=1'
+              src='https://www.youtube.com/embed/HwwGPOhF4CI?autoplay=1'
               className='embed-responsive-item'
               allow='autoplay'
               allowFullScreen

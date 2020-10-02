@@ -3,7 +3,7 @@ import EditTodo from './EditTodo';
 import _ from 'lodash';
 
 const ListTodos = ({ allTodos, setTodosChange }) => {
-  console.log(allTodos); //get all data back
+  // console.log(allTodos); //get all data back
   const [todos, setTodos] = useState([]); // show empty array
 
   // delete todo function
