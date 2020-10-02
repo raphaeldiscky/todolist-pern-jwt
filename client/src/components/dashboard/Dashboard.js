@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import _ from 'lodash';
 
 // components
 import InputTodo from './todolist/InputTodo';
@@ -43,9 +44,12 @@ const Dashboard = ({ setAuth }) => {
 
   return (
     <div>
-      <div className='d-flex mt-5 justify-content-around'>
-        <h1>{name} Todo List </h1>
-        <button className='btn btn-primary' onClick={(e) => logout(e)}>
+      <div className='d-flex mt-5 jumbotron justify-content-between'>
+        <h1>{_.capitalize(name)} Todo List </h1>
+        <button
+          className='btn btn-primary rounded-pill btn-xl'
+          onClick={(e) => logout(e)}
+        >
           Logout
         </button>
       </div>

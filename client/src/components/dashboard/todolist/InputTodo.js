@@ -29,15 +29,19 @@ const InputTodo = ({ setTodosChange }) => {
 
   return (
     <Fragment>
-      <h1 className='text-center mt-5'>My Todo List</h1>
+      <h1 className='text-center mt-5' />
+
       <form className='d-flex mt-5' onSubmit={onSubmitForm}>
         <input
           type='text'
           className='form-control'
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          placeholder='Add new task'
         />
-        <button className='btn btn-success'>Add</button>
+        <button className='btn btn-success'>
+          <i className='fa fa-plus' />
+        </button>
       </form>
     </Fragment>
   );

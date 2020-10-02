@@ -24,7 +24,7 @@ code {
 }
 
 .bg-image {
-  background-image: url('../src/assets/plain.png');
+  background-image: url('../src/assets/spongebob_todo.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -103,4 +103,54 @@ code {
 
 .mastfoot {
   color: black;
+}
+
+/* button */
+.btn-circle {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.btn-circle i {
+  position: relative;
+  top: -1px;
+}
+
+.btn-circle-sm {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  font-size: 0.9rem;
+}
+
+.btn-circle-lg {
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+  font-size: 1.1rem;
+}
+
+.btn-circle-xl {
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  font-size: 1.3rem;
+}
+
+.fa {
+  color: white;
+}
+
+.btn-xl {
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.home-btn {
+  color: #0069d9;
 }

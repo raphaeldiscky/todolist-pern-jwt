@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import EditTodo from './EditTodo';
+import _ from 'lodash';
 
 const ListTodos = ({ allTodos, setTodosChange }) => {
   console.log(allTodos); //get all data back
@@ -24,31 +25,31 @@ const ListTodos = ({ allTodos, setTodosChange }) => {
 
   return (
     <Fragment>
-      <table className='table mt-5 text-center'>
-        <thead>
-          <tr>
-            <th>Description</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
+      <table className='table mt-5'>
+        <thead className='text-center'>
+          <th className='col'>Description</th>
+          <th className='col-md-auto'>Edit</th>
+          <th className='col col-lg-2'>Delete</th>
         </thead>
         <tbody>
-          {todos.map((todo) => (
-            <tr key={todo.todo_id}>
-              <td>{todo.description}</td>
-              <td>
-                <EditTodo todo={todo} setTodosChange={setTodosChange} />
-              </td>
-              <td>
-                <button
-                  className='btn btn-danger'
-                  onClick={() => deleteTodo(todo.todo_id)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+          {todos.length !== 0 &&
+            todos[0].todo_id !== null &&
+            todos.map((todo) => (
+              <tr key={todo.todo_id}>
+                <td>{_.capitalize(todo.description)}</td>
+                <td>
+                  <EditTodo todo={todo} setTodosChange={setTodosChange} />
+                </td>
+                <td>
+                  <button
+                    className='btn btn-danger btn-circle m-1'
+                    onClick={() => deleteTodo(todo.todo_id)}
+                  >
+                    <i className='fa fa-trash' />
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </Fragment>

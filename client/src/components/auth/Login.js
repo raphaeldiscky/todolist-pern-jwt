@@ -47,6 +47,9 @@ const Login = ({ setAuth }) => {
           <div className='d-none d-md-flex col-md-4 col-lg-6 bg-image'></div>
           <div className='col-md-8 col-lg-6'>
             <div className='login d-flex align-items-center py-5'>
+              <button className='btn'>
+                <Link className='home-btn fa fa-home fa-lg' to='/'></Link>
+              </button>
               <div className='container'>
                 <div className='row'>
                   <div className='col-md-9 col-lg-8 mx-auto'>
