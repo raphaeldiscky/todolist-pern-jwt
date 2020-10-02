@@ -45,7 +45,7 @@ const Dashboard = ({ setAuth }) => {
   return (
     <div>
       <div className='d-flex mt-5 jumbotron justify-content-between'>
-        <h1>{_.capitalize(name)} Todo List </h1>
+        <h1>{_.capitalize(name)} Todolist </h1>
         <button
           className='btn btn-primary rounded-pill btn-xl'
           onClick={(e) => logout(e)}

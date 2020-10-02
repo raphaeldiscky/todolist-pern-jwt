@@ -10,6 +10,7 @@ const Landing = () => {
           <p>Sign in and start building your todo list</p>
           <div className='embed-responsive embed-responsive-4by3'>
             <iframe
+              title='spongebob todolist'
               src='http://www.youtube.com/embed/HwwGPOhF4CI?autoplay=1'
               className='embed-responsive-item'
               allow='autoplay'
@@ -27,8 +28,23 @@ const Landing = () => {
         <footer class='mastfoot mt-auto text-center'>
           <div class='inner'>
             <p>
-              Made for <a href='https://omahti.web.id//'>Oprec TI</a>, by{' '}
-              <a href='https://github.com/raphaeldiscky'>@raphaeldiscky</a>.
+              Made for{' '}
+              <a
+                target='_blank'
+                rel='noopener noreferrer'
+                href='https://omahti.web.id//'
+              >
+                Oprec TI
+              </a>
+              , by{' '}
+              <a
+                target='_blank'
+                rel='noopener noreferrer'
+                href='https://github.com/raphaeldiscky'
+              >
+                @raphaeldiscky
+              </a>
+              .
             </p>
           </div>
         </footer>
