@@ -1,25 +1,26 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState } from 'react';
 
 const InputTodo = ({ setTodosChange }) => {
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('');
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
       const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("token", localStorage.token);
+      myHeaders.append('Content-Type', 'application/json');
+      myHeaders.append('token', localStorage.token);
 
       const body = { description };
-      const response = await fetch("http://localhost:5000/dashboard/todos", {
-        method: "POST",
+      const response = await fetch('http://localhost:5000/dashboard/todos', {
+        method: 'POST',
         headers: myHeaders,
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       });
+
       const parseRes = await response.json();
       console.log(parseRes);
       setTodosChange(true);
-      setDescription("");
+      setDescription('');
       // window.location = "/";
     } catch (err) {
       console.error(err.message);
@@ -28,15 +29,15 @@ const InputTodo = ({ setTodosChange }) => {
 
   return (
     <Fragment>
-      <h1 className="text-center mt-5">PERN Todo List</h1>
-      <form className="d-flex mt-5" onSubmit={onSubmitForm}>
+      <h1 className='text-center mt-5'>My Todo List</h1>
+      <form className='d-flex mt-5' onSubmit={onSubmitForm}>
         <input
-          type="text"
-          className="form-control"
+          type='text'
+          className='form-control'
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <button className="btn btn-success">Add</button>
+        <button className='btn btn-success'>Add</button>
       </form>
     </Fragment>
   );
