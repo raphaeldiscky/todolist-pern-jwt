@@ -86,7 +86,7 @@ const Login = ({ setAuth }) => {
                         <label htmlFor='inputPassword'>Password</label>
                       </div>
                       <button
-                        className='btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2'
+                        className='btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2 font-link'
                         type='submit'
                       >
                         Login

@@ -6,7 +6,7 @@ const Landing = () => {
     <Fragment>
       <div className='container-fluid  col-lg-9'>
         <div className='jumbotron mt-2 text-center col-lg-6 col-md-6 col-sm-6 col-xs-6 offset-3 float-md-center '>
-          <h1>Welcome to Todolist App!</h1>
+          <h1>Todolist App</h1>
           <p>Sign in and start building your todo list</p>
           <div className='embed-responsive embed-responsive-4by3'>
             <iframe
@@ -16,14 +16,11 @@ const Landing = () => {
               allowFullScreen
             ></iframe>
           </div>
-          <Link to='/login' className='btn btn-primary rounded-pill mt-5'>
-            Login
-          </Link>
           <Link
             to='/register'
-            className='btn btn-primary ml-3 rounded-pill mt-5'
+            className='btn btn-primary ml-3 rounded-pill mt-5 font-link'
           >
-            Register
+            JOIN NOW
           </Link>
         </div>
 
