@@ -10,7 +10,7 @@ app.use(cors());
 
 if (process.env.NODE_ENV === 'production') {
   // server static content inside build folder
-  app.use(express.static('client/build'));
+  app.use(express.static(path.join(__dirname, 'client/build')));
 }
 
 // ROUTES
