@@ -11,7 +11,8 @@ const devConfig = {
 };
 
 const proConfig = {
-  connectionString: process.env.DATABASE_URL // from heroku addons
+  connectionString: process.env.DATABASE_URL, // from heroku addons
+  ssl: true
 };
 
 const pool = new Pool(
