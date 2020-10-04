@@ -13,7 +13,7 @@ const Dashboard = ({ setAuth }) => {
 
   const getProfile = async () => {
     try {
-      const response = await fetch('/dashboard/', {
+      const response = await fetch('/api/dashboard', {
         method: 'GET',
         headers: { token: localStorage.token } // check if token is valid
       });

@@ -17,7 +17,7 @@ const Register = ({ setAuth }) => {
     try {
       const body = { email, password, name };
       // make fetch request, default of fetch request is get request
-      const response = await fetch('/auth/register', {
+      const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)

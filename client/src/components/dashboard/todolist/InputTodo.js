@@ -11,7 +11,7 @@ const InputTodo = ({ setTodosChange }) => {
       myHeaders.append('token', localStorage.token);
 
       const body = { description };
-      const response = await fetch('/dashboard/todos', {
+      const response = await fetch('/api/dashboard/todos', {
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify(body)

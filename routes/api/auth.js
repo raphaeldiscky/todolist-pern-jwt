@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../db');
+const pool = require('../../db');
 const bcrypt = require('bcrypt');
-const jwtGenerator = require('../utils/jwtGenerator');
-const validation = require('../middleware/validation');
-const authorize = require('../middleware/authorize');
+const jwtGenerator = require('../../utils/jwtGenerator');
+const validation = require('../../middleware/validation');
+const authorize = require('../../middleware/authorize');
 
-// REGISTER ROUTE
+//@route   POST api/auth/register
+//@desc    Register
+//@access  public
 router.post('/register', validation, async (req, res) => {
   try {
     // 1. destructure the req.body (name, email, password)
@@ -40,7 +42,9 @@ router.post('/register', validation, async (req, res) => {
   }
 });
 
-// LOGIN ROUTE
+//@route   POST api/auth/login
+//@desc    Login
+//@access  public
 router.post('/login', validation, async (req, res) => {
   try {
     // 1. destructure the req.body
@@ -74,7 +78,9 @@ router.post('/login', validation, async (req, res) => {
   }
 });
 
-// if token valid from authorize, then return true
+//@route   GET api/auth/login
+//@desc    If token valid from authorize, then return true
+//@access  private
 router.get('/verify', authorize, async (req, res) => {
   try {
     res.json(true);

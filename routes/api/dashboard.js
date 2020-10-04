@@ -1,14 +1,12 @@
 const router = require('express').Router();
-const pool = require('../db');
-const authorize = require('../middleware/authorize');
+const pool = require('../../db');
+const authorize = require('../../middleware/authorize');
 
-// Get all todos and name from a user
+// @route   GET api/dashboard
+// @desc    Get all todos and name from a user
+// @access  private
 router.get('/', authorize, async (req, res) => {
   try {
-    // const user = await pool.query("SELECT user_name FROM users WHERE user_id = $1", [
-    //   req.user.id,
-    // ]);
-
     const user = await pool.query(
       'SELECT u.user_name, t.todo_id, t.description FROM users AS u LEFT JOIN todos AS t ON u.user_id = t.user_id WHERE u.user_id = $1 ORDER BY todo_id',
       [req.user.id] // from jwtGenerator payload
@@ -21,7 +19,9 @@ router.get('/', authorize, async (req, res) => {
   }
 });
 
-// Create a todo
+// @route   POST api/dashboard/todos
+// @desc    Create a todo
+// @access  private
 router.post('/todos', authorize, async (req, res) => {
   try {
     // get data from client side
@@ -37,7 +37,9 @@ router.post('/todos', authorize, async (req, res) => {
   }
 });
 
-// Update a todo
+//@route  PUT api/dashboard/todos/:Id
+//@desc   Update a todo
+//@access private
 router.put('/todos/:id', authorize, async (req, res) => {
   try {
     const { id } = req.params;
@@ -55,7 +57,9 @@ router.put('/todos/:id', authorize, async (req, res) => {
   }
 });
 
-// Delete a todo
+//@route  DELETE api/dashboard/todos/:Id
+//@desc   Delete a todo
+//@access private
 router.delete('/todos/:id', authorize, async (req, res) => {
   try {
     const { id } = req.params;

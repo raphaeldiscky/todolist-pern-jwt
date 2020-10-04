@@ -1,5 +1,4 @@
 // check if token being given to server is valid
-
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
